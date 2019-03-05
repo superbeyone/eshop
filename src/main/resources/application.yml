@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.NonRegisteringDriver
+    url: jdbc:mysql://192.9.104.131:3306/super_shop
+    username: root
+    password: tdt_1818
+  redis:
+    cluster:
+      nodes: 192.168.75.143:7001,192.168.75.143:7002,192.168.75.144:7003,192.168.75.144:7004,192.168.75.145:7005,192.168.75.145:7006,192.168.75.146:7007,192.168.75.146:7008
+    jedis:
+      pool:
+        max-active: 300
+        max-idle: 100
+        min-idle: 20
+    timeout: 60000
+mybatis:
+  mapper-locations: classpath:/mybatis/*.xml
+  type-aliases-package: com.superbeyone.eshop.inventory.mapper
