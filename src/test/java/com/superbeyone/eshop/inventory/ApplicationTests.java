@@ -17,10 +17,10 @@ public class ApplicationTests {
     @Autowired
     RedisTemplate redisTemplate;
 
-    ValueOperations<String,String> valueOperations;
+    ValueOperations<String, String> valueOperations;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         valueOperations = redisTemplate.opsForValue();
     }
 

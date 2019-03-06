@@ -14,4 +14,6 @@ public interface RedisDao {
 
     String get(String key);
 
+    void del(String key);
+
 }

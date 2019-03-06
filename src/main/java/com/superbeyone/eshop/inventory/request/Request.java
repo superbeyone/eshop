@@ -9,5 +9,10 @@ package com.superbeyone.eshop.inventory.request;
  **/
 
 public interface Request {
+    /**
+     * 处理请求
+     */
+    void process();
 
+    Integer getProductId();
 }

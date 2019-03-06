@@ -34,5 +34,10 @@ public class RedisDaoImpl implements RedisDao {
         return (String) redisUtil.get(key);
     }
 
+    @Override
+    public void del(String key) {
+        redisUtil.del(key);
+    }
+
 
 }
