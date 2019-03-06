@@ -65,7 +65,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     @Override
     public void setProductInventoryCache(ProductInventory productInventory) {
         String key = "product:inventory:" + productInventory.getProductId();
-        redisDao.set(key, String.valueOf(productInventory.getInventoryCut()));
+        redisDao.set(key, String.valueOf(productInventory.getInventoryCnt()));
     }
 
     /**

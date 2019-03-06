@@ -25,6 +25,12 @@ public class ProductInventoryCacheRefreshRequest implements Request {
     private ProductInventoryService productInventoryService;
 
     /**
+     * 是否强制刷新缓存
+     */
+    private boolean forceRefresh;
+
+
+    /**
      * 处理请求
      */
     @Override
@@ -38,5 +44,10 @@ public class ProductInventoryCacheRefreshRequest implements Request {
     @Override
     public Integer getProductId() {
         return productId;
+    }
+
+    @Override
+    public boolean isForceRefresh() {
+        return forceRefresh;
     }
 }

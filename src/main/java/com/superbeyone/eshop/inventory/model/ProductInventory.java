@@ -16,6 +16,6 @@ public class ProductInventory {
 
     private Integer productId;
 
-    private long inventoryCut;
+    private long inventoryCnt;
 
 }
