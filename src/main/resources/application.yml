@@ -16,3 +16,7 @@ spring:
 mybatis:
   mapper-locations: classpath:/mybatis/*.xml
   type-aliases-package: com.superbeyone.eshop.inventory.mapper
+
+logging:
+  level:
+    root: debug

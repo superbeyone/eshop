@@ -14,7 +14,15 @@ public interface Request {
      */
     void process();
 
+    /**
+     * 获取ProductId
+     * @return
+     */
     Integer getProductId();
 
+    /**
+     * 是否需要强制刷新的标识位
+     * @return
+     */
     boolean isForceRefresh();
 }

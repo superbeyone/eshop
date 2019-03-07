@@ -3,6 +3,8 @@ package com.superbeyone.eshop.inventory.service.impl;
 import com.superbeyone.eshop.inventory.request.Request;
 import com.superbeyone.eshop.inventory.request.RequestQueue;
 import com.superbeyone.eshop.inventory.service.RequestAsyncProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -16,6 +18,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  **/
 @Service("requestAsyncProcessService")
 public class RequestAsyncProcessServiceImpl implements RequestAsyncProcessService {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public void process(Request request) {
@@ -45,6 +48,9 @@ public class RequestAsyncProcessServiceImpl implements RequestAsyncProcessServic
         int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
         // 对hash值取模，将hash值路由到指定的内存队列中
         int index = (requestQueue.queueSize() - 1) & hash;
+        logger.debug("商品ID{}，路由队列索引{}", productId, index);
+
+
         return requestQueue.getQueue(index);
     }
 }

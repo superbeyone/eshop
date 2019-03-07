@@ -5,6 +5,8 @@ import com.superbeyone.eshop.inventory.model.ProductInventory;
 import com.superbeyone.eshop.inventory.persist.RedisDao;
 import com.superbeyone.eshop.inventory.service.ProductInventoryService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductInventoryServiceImpl implements ProductInventoryService {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     ProductInventoryMapper productInventoryMapper;
 
@@ -33,6 +36,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     @Override
     public void updateProductInventory(ProductInventory productInventory) {
         productInventoryMapper.updateProductInventory(productInventory);
+        logger.debug("修改数据库中的商品库存，商品Id={}，商品数量={}", productInventory.getProductId(), productInventory.getInventoryCnt());
     }
 
     /**
@@ -66,6 +70,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     public void setProductInventoryCache(ProductInventory productInventory) {
         String key = "product:inventory:" + productInventory.getProductId();
         redisDao.set(key, String.valueOf(productInventory.getInventoryCnt()));
+        logger.debug("已更新商品库存的缓存，商品Id={}", productInventory.getProductId());
     }
 
     /**
@@ -79,7 +84,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
         long inventoryCnt = 0L;
         String key = "product:inventory:" + productId;
         String result = redisDao.get(key);
-
+        logger.debug("从商品缓存中获取数据，key={}，result={}", key, result);
         if (StringUtils.isNotBlank(result)) {
             try {
                 inventoryCnt = Long.valueOf(result);

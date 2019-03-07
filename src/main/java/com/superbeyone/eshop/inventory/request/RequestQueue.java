@@ -75,6 +75,9 @@ public class RequestQueue {
      * @return
      */
     public ArrayBlockingQueue<Request> getQueue(int index) {
+        if (index > queues.size()) {
+            return new ArrayBlockingQueue<>(1);
+        }
         return queues.get(index);
     }
 

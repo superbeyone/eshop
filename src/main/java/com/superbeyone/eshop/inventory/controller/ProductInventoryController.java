@@ -7,6 +7,8 @@ import com.superbeyone.eshop.inventory.request.Request;
 import com.superbeyone.eshop.inventory.service.ProductInventoryService;
 import com.superbeyone.eshop.inventory.service.RequestAsyncProcessService;
 import com.superbeyone.eshop.inventory.vo.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProductInventoryController {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     ProductInventoryService productInventoryService;
 
@@ -29,6 +33,7 @@ public class ProductInventoryController {
 
     @RequestMapping("/updateProductInventory")
     public Response updateProductInventory(ProductInventory productInventory) {
+        logger.debug("商品ID{}，商品库存{}", productInventory.getProductId(), productInventory.getInventoryCnt());
         Response response = null;
 
         try {
@@ -44,6 +49,7 @@ public class ProductInventoryController {
 
     @RequestMapping("/getProductInventory")
     public ProductInventory getProductInventory(Integer productId) {
+        logger.debug("获取商品信息，商品Id={}", productId);
         ProductInventory productInventory = null;
 
 
@@ -65,7 +71,7 @@ public class ProductInventoryController {
 
                 //如果读取到了结果就返回
                 if (productInventory != null) {
-                    System.out.println("--------------------------->\t在200ms内读取到了redis中的库存缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
+                    logger.debug("--------------------------->\t在200ms内读取到了redis中的库存缓存，商品id={}, 商品库存数量={}", productInventory.getProductId(), productInventory.getInventoryCnt());
                     return productInventory;
                 } else {
                     //如果没有读取到结果

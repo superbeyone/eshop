@@ -2,7 +2,6 @@ package com.superbeyone.eshop.inventory.request;
 
 import com.superbeyone.eshop.inventory.model.ProductInventory;
 import com.superbeyone.eshop.inventory.service.ProductInventoryService;
-import lombok.AllArgsConstructor;
 
 /**
  * @author Mr.superbeyone
@@ -11,7 +10,6 @@ import lombok.AllArgsConstructor;
  * @description 重新加载商品库存的缓存
  * @date 2019-03-06 08:54
  **/
-@AllArgsConstructor
 public class ProductInventoryCacheRefreshRequest implements Request {
 
     /**
@@ -29,6 +27,11 @@ public class ProductInventoryCacheRefreshRequest implements Request {
      */
     private boolean forceRefresh;
 
+    public ProductInventoryCacheRefreshRequest(Integer productId, ProductInventoryService productInventoryService, boolean forceRefresh) {
+        this.productId = productId;
+        this.productInventoryService = productInventoryService;
+        this.forceRefresh = false;
+    }
 
     /**
      * 处理请求
